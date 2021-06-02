@@ -1,0 +1,3 @@
+{
+    "files": ["qml/pages/adminPage.qml","qml/controls/CustomToggleMenuBtn.qml","qml/pages/subpages/mapMarker.qml","qml/controls/CustomTopBarBtn.qml","qml/pages/subpages/mapDrawLine.qml","backend/communication/serialCommunication.py","qml/pages/testPage.qml","main.py","qml/controls/windowCustomButtons.qml","qml/pages/subpages/Marker.qml","qml/controls/CustomLeftMenuBtn.qml","main.qml","qml/pages/emptyHomePage.qml","qml/pages/homePage.qml","qml/pages/subpages/Line.qml"]
+}
