@@ -11,6 +11,8 @@ Item {
 
     property bool cameraViewState: false
     property string imagePathTest: "../../images/svg_images/close_icon.svg"
+    property var initPoint : Qt.point(39.92077, 32.85411)
+
 
     //Map Marker
     function addMarker(latitude, longitude)
@@ -20,8 +22,10 @@ Item {
                                               coordinate: QtPositioning.coordinate(latitude, longitude)
                                           })
         map.addMapItem(item)
-        console.log("Working")
+        console.log("Working  ",latitude," ",longitude)
+
     }
+
 
     //Waypoint Listesini tutan model
 
@@ -57,20 +61,8 @@ Item {
             plugin: mapPlugin
             zoomLevel: 16
             activeMapType: supportedMapTypes[4]
-            center: QtPositioning.coordinate(39.92077, 32.85411)
-            /*
-            Component.onCompleted: {
-                for( var i = 0; i < supportedMapTypes.length; i++) {
-                    console.log(supportedMapTypes[i].name)
-                }
-
-                console.log("Map loaded")
-
-                addMarker(59.14,14.15)
-            }
-            */
-
-            Component.onCompleted:addMarker(39.92077,32.85411)
+            center:QtPositioning.coordinate(initPoint.x,initPoint.y)
+            Component.onCompleted:addMarker(initPoint.x,initPoint.y)
 
 
             //--------------------- MAP WAYPOINT CIZIMI --------------------------------
@@ -79,9 +71,11 @@ Item {
             MapItemView
             {
                 model: md
-                delegate: Marker{
+                delegate: Marker{                  
                     text: title
                     coordinate: QtPositioning.coordinate(coords.latitude, coords.longitude)
+                    count: md.count
+
                 }
                 Lines
                 {
@@ -96,20 +90,28 @@ Item {
                 anchors.fill: parent
                 z: 1
                 onClicked: {
-                    var point = Qt.point(mouse.x, mouse.y)
-                    var coord = map.toCoordinate(point);
-                    var text = md.count + 1;
-                    md.append({"coords": coord, "title": text})
-                    polyLineList.addCoordinate(coord)
-                }
-            }
+                    if(md.count ===0 )
+                    {
+                        var coord = QtPositioning.coordinate(initPoint.x, initPoint.y)
+                        Label
+                        {
 
-            Image {
-                id: image3
-                width: 100
-                height: 100
-                source: "qrc:/qtquickplugin/images/template_image.png"
-                fillMode: Image.PreserveAspectFit
+                        }
+
+                        var text = md.count + 1;
+                        md.append({"coords": coord, "title": ""})
+                    }
+                    else
+                    {
+                        var point = Qt.point(mouse.x, mouse.y)
+                        var coord = map.toCoordinate(point);
+                        var text = (md.count).toString();
+                        md.append({"coords": coord, "title": text})
+
+                    }
+                    polyLineList.addCoordinate(coord)
+
+                }
             }
 
             Rectangle {
@@ -651,6 +653,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;formeditorZoom:1.25;height:800;width:1200}D{i:11}
+    D{i:0;autoSize:true;formeditorZoom:0.75;height:800;width:1200}
 }
 ##^##*/

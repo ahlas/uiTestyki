@@ -4,7 +4,7 @@ import QtLocation 5.8
 MapPolyline {
     id: mainPolyline
     line.width: 4
-    line.color: "#a80223"
+    line.color: "#000099"
 }
 
 /*##^##

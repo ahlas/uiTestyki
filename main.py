@@ -9,6 +9,9 @@ import codecs
 import pickle
 
 from PySide2.QtQml import QQmlApplicationEngine
+from PySide2.QtWidgets import *
+from PySide2.QtCharts import QtCharts
+from PySide2.QtGui import QPainter
 #from PySide2.QtGui import QGuiApplication
 #from PySide2.QtCore import QObject, Slot, Signal
 
@@ -97,7 +100,7 @@ class MainWindow(QObject):
 
 
 if __name__ == "__main__":
-    app = QGuiApplication(sys.argv)
+    app = QApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
     #Get Contex from UI
@@ -106,6 +109,7 @@ if __name__ == "__main__":
 
     #Load QML File
     engine.load(os.path.join(os.path.dirname(__file__), "qml/main.qml"))
+
 
     if not engine.rootObjects():
         sys.exit(-1)

@@ -280,9 +280,10 @@ Window {
                             id: btnHome
                             width: leftMenu.width
                             text: "Home"
-                            isActiveMenu: false
+                            isActiveMenu: true
                             onClicked:{
                                 btnHome.isActiveMenu = true
+                                btnGraphic.isActiveMenu = false
                                 btnTest.isActiveMenu = false
                                 btnAdmin.isActiveMenu = false
                                 stackView.push(Qt.resolvedUrl("pages/homePage.qml"))
@@ -290,21 +291,29 @@ Window {
                         }
 
                         CustomLeftMenuBtn {
-                            id: btnTemp1
+                            id: btnGraphic
                             width: leftMenu.width
-                            text: "Temp1"
+                            text: "Graphic"
                             isActiveMenu: false
-                            btnIconSource: "../images/svg_images/open_icon.svg"
+                            btnIconSource: "../images/svg_images/analysis.svg"
+                            onClicked:{
+                                btnHome.isActiveMenu = false
+                                btnGraphic.isActiveMenu = true
+                                btnTest.isActiveMenu = false
+                                btnAdmin.isActiveMenu = false
+                                stackView.push(Qt.resolvedUrl("pages/graphicPage.qml"))
+                            }
                         }
 
                         CustomLeftMenuBtn {
                             id: btnTest
                             width: leftMenu.width
                             text: "Temp2"
-                            isActiveMenu: true
+                            isActiveMenu: false
                             btnIconSource: "../images/svg_images/save_icon.svg"
                             onClicked:{
                                 btnHome.isActiveMenu = false
+                                btnGraphic.isActiveMenu = false
                                 btnTest.isActiveMenu = true
                                 btnAdmin.isActiveMenu = false
                                 stackView.push(Qt.resolvedUrl("pages/testPage.qml"))
@@ -322,6 +331,7 @@ Window {
                         anchors.bottomMargin: 25
                         onClicked:{
                             btnHome.isActiveMenu = false
+                            btnGraphic.isActiveMenu = false
                             btnTest.isActiveMenu = false
                             btnAdmin.isActiveMenu = true
                             stackView.push(Qt.resolvedUrl("pages/adminPage.qml"))
@@ -332,7 +342,7 @@ Window {
 
                 Rectangle {
                     id: contentPages
-                    color: "#2c313c"
+                    color: "#1c1d20"
                     anchors.left: leftMenu.right
                     anchors.right: parent.right
                     anchors.top: parent.top
@@ -480,6 +490,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}
+    D{i:0;formeditorZoom:0.5}
 }
 ##^##*/
